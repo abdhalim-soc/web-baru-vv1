@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAN Bengkulu Selatan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C97A;
+    --dark: #0A0E1A; --dark-2: #111827; --dark-3: #1C2537;
+    --teal: #0EA5C2; --teal-light: #38C4DC;
+    --white: #F8F6F1; --gray: #9CA3AF; --text: #E2DDD6;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:auto; }
+  body { background:var(--dark); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.9rem 2rem;
+    background:rgba(10,14,26,0.9); backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(201,168,76,0.15);
+    animation:slideDown 0.8s ease forwards;
+  }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  .nav-logo { display:flex; align-items:center; gap:0.8rem; }
+  .nav-logo-img {
+    width:42px; height:42px; border-radius:10px; overflow:hidden;
+    border:2px solid rgba(201,168,76,0.4);
+    background:linear-gradient(135deg,var(--gold),var(--teal));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-weight:900; color:#fff; font-size:1.2rem;
+  }
+  .nav-logo-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .nav-logo-img img[src="logo.png"]:not([complete]) + .logo-fallback,
+  .nav-logo-img img.error { display:none; }
+  .nav-logo-text span:first-child {
+    display:block; font-family:'Playfair Display',serif;
+    font-weight:700; color:var(--gold); font-size:0.92rem; letter-spacing:0.04em;
+  }
+  .nav-logo-text span:last-child {
+    display:block; font-size:0.65rem; color:var(--gray); letter-spacing:0.12em; text-transform:uppercase;
+  }
+  .nav-links { display:flex; gap:1.8rem; list-style:none; }
+  .nav-links a {
+    color:var(--gray); text-decoration:none; font-size:0.83rem;
+    font-weight:500; letter-spacing:0.04em; transition:color 0.3s; position:relative;
+  }
+  .nav-links a::after {
+    content:''; position:absolute; bottom:-4px; left:0; right:0;
+    height:1px; background:var(--gold); transform:scaleX(0);
+    transition:transform 0.3s; transform-origin:left;
+  }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-links a:hover::after { transform:scaleX(1); }
+  .nav-cta {
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--dark)!important; padding:0.45rem 1.1rem; border-radius:6px; font-weight:600!important;
+  }
+  .nav-cta::after { display:none!important; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; display:flex; align-items:center;
+    position:relative; overflow:hidden; padding:6rem 2rem 4rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%,rgba(14,165,194,0.08) 0%,transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 30%,rgba(201,168,76,0.06) 0%,transparent 50%),
+      linear-gradient(180deg,#0A0E1A 0%,#0D1525 100%);
+  }
+  .hero-grid {
+    position:absolute; inset:0; overflow:hidden; opacity:0.04;
+    background-image:linear-gradient(rgba(201,168,76,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.5) 1px,transparent 1px);
+    background-size:60px 60px;
+  }
+  .orb { position:absolute; border-radius:50%; filter:blur(60px); animation:float 8s ease-in-out infinite; }
+  .orb-1 { width:300px;height:300px;top:-80px;right:10%;background:rgba(14,165,194,0.12);animation-delay:0s; }
+  .orb-2 { width:200px;height:200px;bottom:20%;left:5%;background:rgba(201,168,76,0.1);animation-delay:3s; }
+  .orb-3 { width:150px;height:150px;top:40%;right:25%;background:rgba(56,196,220,0.08);animation-delay:1.5s; }
+  @keyframes float { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.05)} }
+  .hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; animation:heroIn 1s ease 0.3s both; }
+  @keyframes heroIn { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.3);
+    padding:0.4rem 1rem; border-radius:100px; margin-bottom:2rem;
+    font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); font-weight:600;
+  }
+  .hero-badge .dot { width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+  h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:900; line-height:1.1; color:var(--white); margin-bottom:1.5rem; }
+  h1 em { font-style:normal; color:var(--gold); }
+  .hero-sub { font-size:clamp(0.95rem,2vw,1.15rem); color:var(--gray); line-height:1.7; max-width:600px; margin-bottom:3rem; font-weight:300; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn-primary, .btn-secondary { cursor:pointer; border:none; font-family:'DM Sans',sans-serif; }
+  .btn-primary {
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--dark); padding:0.85rem 2rem; border-radius:8px;
+    font-weight:700; font-size:0.9rem; transition:all 0.3s;
+    box-shadow:0 8px 30px rgba(201,168,76,0.3);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(201,168,76,0.45); }
+  .btn-secondary {
+    border:1px solid rgba(201,168,76,0.35)!important; color:var(--gold);
+    padding:0.85rem 2rem; border-radius:8px; font-weight:600;
+    font-size:0.9rem; background:transparent; transition:all 0.3s;
+  }
+  .btn-secondary:hover { background:rgba(201,168,76,0.08); transform:translateY(-2px); }
+  .stats-strip {
+    display:flex; margin-top:4rem;
+    border:1px solid rgba(201,168,76,0.15); border-radius:14px;
+    overflow:hidden; backdrop-filter:blur(20px); background:rgba(255,255,255,0.02);
+  }
+  .stat { flex:1; padding:1.4rem; text-align:center; border-right:1px solid rgba(201,168,76,0.12); transition:background 0.3s; }
+  .stat:last-child { border-right:none; }
+  .stat:hover { background:rgba(201,168,76,0.05); }
+  .stat-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); display:block; line-height:1; }
+  .stat-label { font-size:0.72rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; margin-top:0.3rem; }
+
+  /* SECTIONS */
+  section { padding:5rem 2rem; }
+  .section-inner { max-width:1000px; margin:0 auto; }
+  .section-tag {
+    font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--teal); font-weight:600; margin-bottom:0.8rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+  .section-tag::before { content:''; width:24px; height:1px; background:var(--teal); }
+  h2 { font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(1.8rem,4vw,2.8rem); color:var(--white); line-height:1.2; margin-bottom:1rem; }
+  h2 span { color:var(--gold); }
+  .section-desc { color:var(--gray); font-size:1rem; line-height:1.75; max-width:600px; font-weight:300; margin-bottom:3rem; }
+  .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent); margin:0 2rem; }
+
+  /* KEPALA SEKOLAH */
+  .principal-card {
+    display:grid; grid-template-columns:1fr 1.4fr; gap:3rem; align-items:center;
+    background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(14,165,194,0.05));
+    border:1px solid rgba(201,168,76,0.15); border-radius:20px; padding:3rem;
+    position:relative; overflow:hidden; transition:transform 0.4s,box-shadow 0.4s;
+  }
+  .principal-card:hover { transform:translateY(-4px); box-shadow:0 24px 60px rgba(0,0,0,0.4); }
+  .principal-card::before {
+    content:'"'; position:absolute; top:-20px; right:30px;
+    font-size:15rem; font-family:'Playfair Display',serif;
+    color:rgba(201,168,76,0.06); line-height:1; pointer-events:none;
+  }
+  .pc-photo-wrap { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+  .pc-photo {
+    width:100%; max-width:220px; aspect-ratio:3/4; border-radius:14px; overflow:hidden;
+    border:2px solid rgba(201,168,76,0.25);
+    background:linear-gradient(145deg,#1C2537,#111827);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .pc-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+  .pc-photo-placeholder {
+    display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+  }
+  .pc-photo-placeholder .avatar-icon {
+    width:80px; height:80px; border-radius:50%;
+    background:linear-gradient(135deg,rgba(201,168,76,0.3),rgba(14,165,194,0.3));
+    display:flex; align-items:center; justify-content:center; font-size:2.5rem;
+  }
+  .pc-photo-placeholder span { font-size:0.75rem; color:var(--gray); text-align:center; line-height:1.4; }
+  .pc-name-below { text-align:center; }
+  .pc-name-below strong { display:block; color:var(--white); font-weight:600; font-size:1rem; }
+  .pc-name-below em { font-style:normal; font-size:0.78rem; color:var(--teal); letter-spacing:0.08em; text-transform:uppercase; }
+  .pc-greeting { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--gold); font-style:italic; margin-bottom:1rem; }
+  .pc-text { color:var(--gray); line-height:1.85; font-size:0.95rem; font-weight:300; }
+  .pc-join { margin-top:1rem; color:var(--teal); font-weight:500; font-size:0.95rem; }
+
+  /* VISI MISI */
+  .visi-box {
+    background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));
+    border:1px solid rgba(201,168,76,0.3); border-radius:16px; padding:2.5rem;
+    margin-bottom:2.5rem; position:relative; overflow:hidden;
+  }
+  .visi-box::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg,var(--gold),var(--gold-light)); }
+  .visi-label { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:1rem; }
+  .visi-text { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,2.5vw,1.35rem); color:#FFFFFF; line-height:1.7; font-style:italic; font-weight:600; text-shadow:0 1px 3px rgba(0,0,0,0.4); }
+  .misi-label-top { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); font-weight:600; margin-bottom:1.2rem; }
+  .misi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; }
+  .misi-card {
+    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07);
+    border-radius:12px; padding:1.4rem 1.4rem 1.4rem 1rem;
+    display:flex; gap:1rem; align-items:flex-start; transition:all 0.3s;
+  }
+  .misi-card:hover { border-color:rgba(14,165,194,0.3); transform:translateY(-3px); background:rgba(14,165,194,0.04); }
+  .misi-num { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:rgba(201,168,76,0.25); line-height:1; flex-shrink:0; min-width:36px; }
+  .misi-text { color:#E2DDD6; font-size:0.88rem; line-height:1.7; font-weight:400; }
+
+  /* FASILITAS */
+  .facilities-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; }
+  .fac-card {
+    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px; padding:1.8rem; transition:all 0.35s; position:relative; overflow:hidden;
+  }
+  .fac-card::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,rgba(14,165,194,0.06),rgba(201,168,76,0.06));
+    opacity:0; transition:opacity 0.35s;
+  }
+  .fac-card:hover { border-color:rgba(14,165,194,0.35); transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.35); }
+  .fac-card:hover::before { opacity:1; }
+  .fac-icon {
+    width:48px; height:48px; border-radius:12px;
+    background:linear-gradient(135deg,var(--teal),var(--teal-light));
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+    margin-bottom:1.1rem; box-shadow:0 8px 20px rgba(14,165,194,0.3); position:relative;
+  }
+  .fac-title { font-weight:700; color:var(--white); margin-bottom:0.5rem; font-size:1rem; position:relative; }
+  .fac-desc { color:var(--gray); font-size:0.87rem; line-height:1.65; font-weight:300; position:relative; }
+
+  /* KALENDER */
+  .calendar-wrap {
+    background:rgba(255,255,255,0.02); border:1px solid rgba(201,168,76,0.15);
+    border-radius:20px; overflow:hidden;
+  }
+  .cal-header {
+    background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(14,165,194,0.08));
+    padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid rgba(201,168,76,0.15);
+  }
+  .cal-month { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--white); font-weight:700; }
+  .cal-nav { display:flex; gap:0.5rem; }
+  .cal-btn {
+    width:32px; height:32px; border-radius:8px; border:1px solid rgba(201,168,76,0.3);
+    background:transparent; color:var(--gold); cursor:pointer; font-size:0.9rem;
+    display:flex; align-items:center; justify-content:center; transition:all 0.3s;
+  }
+  .cal-btn:hover { background:rgba(201,168,76,0.15); }
+  .cal-grid { padding:1.5rem 2rem 2rem; }
+  .cal-days-header { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:8px; }
+  .cal-day-name { text-align:center; font-size:0.72rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 0; }
+  .cal-days { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-day {
+    aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+    border-radius:8px; font-size:0.82rem; color:var(--gray); cursor:default;
+    transition:all 0.2s; position:relative;
+  }
+  .cal-day:hover { background:rgba(255,255,255,0.05); color:var(--white); }
+  .cal-day.today { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:var(--dark); font-weight:700; }
+  .cal-day.has-event { color:var(--teal); font-weight:600; }
+  .cal-day.has-event::after { content:''; position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:4px; height:4px; border-radius:50%; background:var(--teal); }
+  .cal-day.empty { opacity:0; pointer-events:none; }
+  .cal-day.other-month { opacity:0.3; }
+  .cal-events { margin-top:1.5rem; padding:0 2rem 2rem; display:flex; flex-direction:column; gap:0.7rem; }
+  .cal-event-item {
+    display:flex; align-items:center; gap:1rem; padding:0.9rem 1.2rem;
+    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07);
+    border-radius:10px; transition:all 0.3s;
+  }
+  .cal-event-item:hover { border-color:rgba(14,165,194,0.3); background:rgba(14,165,194,0.04); }
+  .cal-event-date {
+    min-width:44px; height:44px; border-radius:10px;
+    background:linear-gradient(135deg,var(--teal),var(--teal-light));
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:0.65rem; color:#fff; letter-spacing:0.05em;
+  }
+  .cal-event-date strong { font-size:1.1rem; line-height:1; }
+  .cal-event-info .ev-title { color:var(--white); font-size:0.88rem; font-weight:600; }
+  .cal-event-info .ev-desc { color:var(--gray); font-size:0.78rem; margin-top:0.15rem; }
+  .cal-event-badge {
+    margin-left:auto; font-size:0.68rem; padding:0.2rem 0.6rem; border-radius:100px;
+    background:rgba(201,168,76,0.15); color:var(--gold); white-space:nowrap;
+  }
+
+  /* BERITA */
+  .news-card {
+    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px; overflow:hidden; transition:all 0.35s; cursor:pointer;
+  }
+  .news-card:hover { transform:translateY(-5px); border-color:rgba(201,168,76,0.25); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+  .news-img {
+    height:260px; background:linear-gradient(135deg,var(--dark-3),#1a2540);
+    display:flex; align-items:center; justify-content:center;
+    font-size:5rem; position:relative; overflow:hidden;
+  }
+  .news-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(10,14,26,0.8),transparent); }
+  .news-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+  .news-date {
+    position:absolute; bottom:12px; left:12px; z-index:1;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--dark); padding:0.3rem 0.8rem; border-radius:6px;
+    font-size:0.75rem; font-weight:700; letter-spacing:0.05em;
+  }
+  .news-body { padding:1.4rem; }
+  .news-body h3 { color:var(--white); font-size:0.95rem; line-height:1.5; font-weight:600; }
+  .news-body .news-excerpt { color:var(--gray); font-size:0.82rem; margin-top:0.5rem; line-height:1.6; }
+
+  /* SLIDER */
+  .slider-wrap {
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+  }
+  .slider-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+  }
+  .slider-arrow {
+    width:40px; height:40px; border-radius:50%;
+    background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold); font-size:1.1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.3s; flex-shrink:0;
+    z-index:2;
+  }
+  .slider-arrow:hover { background:rgba(201,168,76,0.25); transform:scale(1.08); }
+  .slider-track {
+    display:flex; overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    width:100%;
+  }
+  .slider-track::-webkit-scrollbar { display:none; }
+  .slider-track .prestasi-card {
+    min-width:100%; width:100%; scroll-snap-align:start; flex-shrink:0;
+  }
+  .slider-track .news-card {
+    min-width:100%; width:100%; scroll-snap-align:start; flex-shrink:0;
+  }
+
+  /* FAQ */
+  .faq-list { display:flex; flex-direction:column; gap:0.8rem; }
+  .faq-item { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:12px; overflow:hidden; transition:border-color 0.3s; }
+  .faq-item.open { border-color:rgba(14,165,194,0.3); }
+  .faq-q { padding:1.2rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--white); font-weight:500; font-size:0.92rem; transition:color 0.3s; }
+  .faq-q:hover { color:var(--gold); }
+  .faq-item.open .faq-q { color:var(--teal); }
+  .faq-arrow { width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:transform 0.3s,border-color 0.3s;flex-shrink:0; }
+  .faq-item.open .faq-arrow { transform:rotate(45deg); border-color:var(--teal); color:var(--teal); }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s ease,padding 0.3s; padding:0 1.5rem; color:var(--gray); font-size:0.88rem; line-height:1.75; font-weight:300; }
+  .faq-item.open .faq-a { max-height:200px; padding:0 1.5rem 1.2rem; }
+
+  /* MEMBERS */
+  .members-section { background:linear-gradient(135deg,rgba(14,165,194,0.05),rgba(201,168,76,0.05)); border-radius:20px; padding:3rem; border:1px solid rgba(201,168,76,0.12); }
+  .members-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:2rem; }
+  .member-stat { text-align:center; padding:1.5rem 1rem; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.07); transition:all 0.3s; }
+  .member-stat:hover { border-color:rgba(14,165,194,0.3); transform:translateY(-3px); }
+  .member-stat .num { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--teal); font-weight:700; line-height:1; }
+  .member-stat .lbl { font-size:0.72rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.4rem; }
+
+  /* TESTIMONIAL */
+  .testimonial { background:linear-gradient(135deg,rgba(14,165,194,0.08),rgba(201,168,76,0.06)); border:1px solid rgba(14,165,194,0.2); border-radius:18px; padding:3rem; position:relative; overflow:hidden; }
+  .testimonial::before { content:'❝'; position:absolute; top:-10px; left:20px; font-size:8rem; color:rgba(14,165,194,0.12); line-height:1; pointer-events:none; }
+  .testimonial p { font-family:'Playfair Display',serif; font-size:1.25rem; font-style:italic; color:var(--white); line-height:1.7; position:relative; margin-bottom:1.5rem; }
+  .t-author { display:flex; align-items:center; gap:1rem; position:relative; }
+  .t-avatar { width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:white; }
+  .t-name { font-weight:600; color:var(--white); }
+  .t-role { font-size:0.8rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.1em; }
+
+  /* KONTAK */
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1rem; }
+  .contact-item { display:flex; align-items:flex-start; gap:1rem; padding:1.4rem; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07); border-radius:12px; transition:all 0.3s; }
+  .contact-item:hover { border-color:rgba(201,168,76,0.3); transform:translateY(-3px); }
+  .contact-icon { width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem; }
+  .contact-info .clabel { font-size:0.72rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.2rem; }
+  .contact-info .cval { color:var(--white); font-size:0.9rem; word-break:break-all; }
+  .visitor-row { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem; }
+  .visitor-chip { padding:0.5rem 1.2rem; border-radius:100px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); font-size:0.82rem; color:var(--gray); }
+  .visitor-chip strong { color:var(--teal); margin-left:0.4rem; }
+
+  /* GALERI */
+  .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+  .gallery-item {
+    aspect-ratio:4/3; border-radius:14px; overflow:hidden;
+    background:linear-gradient(135deg,var(--dark-3),#1a2540);
+    border:1px solid rgba(255,255,255,0.07);
+    display:flex; align-items:center; justify-content:center;
+    font-size:3rem; position:relative; cursor:pointer;
+    transition:all 0.35s;
+  }
+  .gallery-item:first-child { grid-column:span 2; aspect-ratio:16/9; }
+  .gallery-item img { width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform 0.5s; }
+  .gallery-item:hover img { transform:scale(1.05); }
+  .gallery-item:hover { border-color:rgba(201,168,76,0.35); box-shadow:0 16px 40px rgba(0,0,0,0.5); }
+  .gallery-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,14,26,0.85),transparent);opacity:0;transition:opacity 0.35s;display:flex;align-items:flex-end;padding:1rem; }
+  .gallery-item:hover .gallery-overlay { opacity:1; }
+  .gallery-overlay span { color:#fff;font-size:0.82rem;font-weight:600; }
+  .gallery-placeholder { position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--gray); }
+  .gallery-placeholder span { font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase; }
+
+  /* PRESTASI */
+  .prestasi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.2rem; }
+  .prestasi-card {
+    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px; padding:2.5rem; transition:all 0.35s; position:relative; overflow:hidden;
+    box-sizing:border-box;
+  }
+  .slider-track .prestasi-card {
+    min-width:100%; width:100%; max-width:100%; flex-shrink:0; scroll-snap-align:start;
+  }
+  .prestasi-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:linear-gradient(180deg,var(--gold),var(--gold-light)); border-radius:3px 0 0 3px; }
+  .prestasi-card:hover { border-color:rgba(201,168,76,0.3); transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.35); }
+  .prestasi-icon { font-size:2rem; margin-bottom:0.8rem; }
+  .prestasi-level { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:0.4rem; }
+  .prestasi-title { color:var(--white); font-weight:600; font-size:0.92rem; line-height:1.4; margin-bottom:0.3rem; }
+  .prestasi-year { font-size:0.78rem; color:var(--gray); }
+
+  /* SOCIAL MEDIA */
+  .social-row { display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem; }
+  .social-btn {
+    display:flex; align-items:center; gap:0.6rem; padding:0.7rem 1.4rem;
+    border-radius:10px; border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.03); color:var(--gray);
+    text-decoration:none; font-size:0.85rem; font-weight:500; transition:all 0.3s;
+  }
+  .social-btn:hover { border-color:rgba(201,168,76,0.4); color:var(--gold); background:rgba(201,168,76,0.06); transform:translateY(-2px); }
+  .social-btn:hover svg { opacity:1; }
+  .social-btn svg { width:18px; height:18px; flex-shrink:0; opacity:0.75; transition:opacity 0.3s; }
+
+  /* MAPS */
+  .maps-wrap { margin-top:2rem; border-radius:16px; overflow:hidden; border:1px solid rgba(201,168,76,0.2); box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+  #osm-map { height:340px; width:100%; }
+  .maps-btn-below {
+    display:inline-flex; align-items:center; gap:0.6rem; margin-top:1rem;
+    padding:0.6rem 1.2rem; border-radius:8px; font-size:0.82rem; font-weight:600;
+    background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25);
+    color:var(--gold); text-decoration:none; transition:all 0.3s;
+  }
+  .maps-btn-below:hover { background:rgba(201,168,76,0.2); transform:translateY(-2px); }
+
+  /* FAC TAP */
+  .fac-tap { font-size:0.72rem; color:var(--gold); margin-top:0.6rem; opacity:0.8; }
+  .fac-card:not(.no-modal) { cursor:pointer; }
+  .fac-card:not(.no-modal):hover { border-color:rgba(201,168,76,0.4); transform:translateY(-4px); }
+
+  /* FAC MODAL */
+  .fac-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:1rem; }
+  .fac-modal.open { display:flex; }
+  .fac-modal-inner { background:var(--dark-2); border:1px solid rgba(201,168,76,0.2); border-radius:20px; max-width:480px; width:100%; overflow:hidden; position:relative; }
+  .fac-modal-close { position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,0.1); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:1rem; z-index:1; }
+  .fac-modal-img { height:220px; background:linear-gradient(135deg,var(--dark-3),#1a2540); display:flex; align-items:center; justify-content:center; font-size:5rem; }
+  .fac-modal-img img { width:100%; height:100%; object-fit:cover; }
+  .fac-modal-title { padding:1.2rem 1.5rem 0.4rem; font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--gold); font-weight:700; }
+  .fac-modal-desc { padding:0 1.5rem 1.5rem; color:var(--gray); font-size:0.88rem; line-height:1.6; }
+
+  /* SLIDER */
+  .slider-wrap { position:relative; display:flex; align-items:center; gap:0.5rem; }
+  .slider-track { display:flex; gap:1.2rem; overflow:hidden; flex:1; scroll-behavior:smooth; }
+  .slider-btn { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); color:var(--gold); width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all 0.3s; }
+  .slider-btn:hover { background:rgba(201,168,76,0.25); }
+  .slider-track .prestasi-card { min-width:260px; flex-shrink:0; }
+  .slider-track .news-card { min-width:300px; flex-shrink:0; }
+  footer { background:var(--dark-2); border-top:1px solid rgba(201,168,76,0.12); padding:2.5rem 2rem; text-align:center; color:var(--gray); font-size:0.8rem; letter-spacing:0.05em; }
+  footer span { color:var(--gold); }
+  .footer-inner { max-width:1000px; margin:0 auto; }
+  .footer-social { display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .footer-social a { color:var(--gray); text-decoration:none; font-size:0.8rem; transition:color 0.3s; padding:0.3rem 0.6rem; }
+  .footer-social a:hover { color:var(--gold); }
+
+  /* PROGRESS BAR */
+  #progress-bar { position:fixed; top:0; left:0; height:2px; z-index:999; background:linear-gradient(90deg,var(--teal),var(--gold)); width:0%; transition:width 0.1s linear; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity:1; transform:translateY(0); transition:opacity 0.7s ease,transform 0.7s ease; }
+  .reveal.hidden { opacity:0; transform:translateY(30px); }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width:700px) {
+    .nav-links { display:none; }
+    .principal-card { grid-template-columns:1fr; }
+    .stats-strip { display:grid; grid-template-columns:1fr 1fr; }
+    .stat:nth-child(2) { border-right:none; }
+    .stat:nth-child(n+3) { border-top:1px solid rgba(201,168,76,0.12); }
+    .cal-grid { padding:1rem; }
+    .cal-events { padding:0 1rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-img">
+      <img src="logo.png" alt="Logo MAN Bengkulu Selatan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:1.2rem;">M</span>
+    </div>
+    <div class="nav-logo-text">
+      <span>MAN Bengkulu Selatan</span>
+      <span>Madrasah Hebat, Madrasah Berprestasi</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#visimisi">Visi & Misi</a></li>
+    <li><a href="#fasilitas">Fasilitas</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#prestasi">Prestasi</a></li>
+    <li><a href="#kalender">Kalender</a></li>
+    <li><a href="#berita">Berita</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+    <li><a href="#" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span>Madrasah Aliyah Negeri · Bengkulu Selatan</div>
+    <h1>Selamat Datang di<br><em>MAN Bengkulu Selatan</em></h1>
+    <p class="hero-sub">Hebat Bermartabat, Mandiri Berprestasi, serta Berakhlakul Karimah. Membentuk generasi unggul melalui pendidikan berbasis teknologi dan nilai-nilai Islami.</p>
+    <div class="hero-btns">
+      <button onclick="smoothScrollTo('tentang')" class="btn-primary">Kenali Kami</button>
+      <button onclick="smoothScrollTo('fasilitas')" class="btn-secondary">Fasilitas Online →</button>
+    </div>
+    <div class="stats-strip">
+      <div class="stat"><span class="stat-num" data-target="184720">0</span><div class="stat-label">Total Pengunjung</div></div>
+      <div class="stat"><span class="stat-num" data-target="36">0</span><div class="stat-label">Member Aktif</div></div>
+      <div class="stat"><span class="stat-num" data-target="92">0</span><div class="stat-label">Hari Ini</div></div>
+      <div class="stat"><span class="stat-num" data-target="2">0</span><div class="stat-label">Online</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KEPALA SEKOLAH -->
+<section id="tentang">
+  <div class="section-inner">
+    <div class="section-tag">Pendahuluan</div>
+    <h2>Pengantar <span>Kepala Sekolah</span></h2>
+    <div class="principal-card reveal">
+      <div class="pc-photo-wrap">
+        <div class="pc-photo">
+          <img src="kepala-sekolah.jpg" alt="Buyung Kalil" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="pc-photo-placeholder" style="display:none">
+            <div class="avatar-icon">👨‍💼</div>
+            <span>Ganti dengan foto<br>pak-buyung.jpg</span>
+          </div>
+        </div>
+        <div class="pc-name-below">
+          <strong>Buyung Kalil</strong>
+          <em>Kepala MAN Bengkulu Selatan</em>
+        </div>
+      </div>
+      <div>
+        <div class="pc-greeting">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+        <p class="pc-text">Dalam rangka penerapan kurikulum merdeka pada jenjang pendidikan madrasah, sarana pembelajaran dengan menggunakan website ini bertujuan untuk mempermudah MAN Bengkulu Selatan melaksanakan program tersebut. Pemanfaatan teknologi informasi tentunya sangat membantu warga Madrasah dalam berintaksi dengan dunia luar serta mengintegrasikan teknologi dalam pembelajaran. Selain itu, teknologi merupakan sumber daya yang dapat digunakan oleh guru dan siswa sebagai penunjang dalam proses belajar mengajar.</p>
+        <p class="pc-join">Mari bergabung bersama Kami, MAN Bengkulu Selatan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VISI MISI -->
+<section id="visimisi">
+  <div class="section-inner">
+    <div class="section-tag">Arah & Tujuan</div>
+    <h2>Visi & <span>Misi</span></h2>
+    <div class="visi-box reveal">
+      <div class="visi-label">Visi</div>
+      <p class="visi-text">Terwujudnya Siswa Siswi MAN Bengkulu Selatan Yang Islami, Berakhlak Mulia, Cerdas dan Kompetitif.</p>
+    </div>
+    <div class="misi-label-top reveal">Misi</div>
+    <div class="misi-grid">
+      <div class="misi-card reveal"><div class="misi-num">01</div><div class="misi-text">Menumbuhkan keimanan dan ketaqwaan melalui penghayatan dan pengamalan ajaran agama.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">02</div><div class="misi-text">Melakukan pembelajaran dan bimbingan secara efektif, terjadwal dan efisien.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">03</div><div class="misi-text">Mengupayakan agar komunitas Madrasah menerapkan ajaran Islam dalam kehidupan sehari-hari.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">04</div><div class="misi-text">Menciptakan warga Madrasah yang memiliki akhlak mulia, beradab dan berilmu.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">05</div><div class="misi-text">Meningkatkan mutu dan daya saing dalam bidang Pendidikan Agama Islam.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">06</div><div class="misi-text">Mengembangkan Madrasah menjadi lembaga pendidikan yang solutif dan pilihan bagi masyarakat.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">07</div><div class="misi-text">Mewujudkan manajemen pendidikan yang akuntabel, transparan, efisien, efektif serta visioner.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">08</div><div class="misi-text">Membekali peserta didik dengan ilmu agama yang memadai untuk mendorong terbentuknya masyarakat Islami.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">09</div><div class="misi-text">Menumbuhkembangkan profesionalisme tenaga pendidik dan kependidikan.</div></div>
+      <div class="misi-card reveal"><div class="misi-num">10</div><div class="misi-text">Mendorong dan membina siswa pada jalur seni dan budaya serta menumbuhkan semangat mencintai lingkungan sekitar.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FASILITAS -->
+<section id="fasilitas">
+  <div class="section-inner">
+    <div class="section-tag">Layanan</div>
+    <h2>Fasilitas <span>Madrasah</span></h2>
+    <p class="section-desc">Fasilitas lengkap untuk mendukung kegiatan belajar dan kehidupan di MAN Bengkulu Selatan.</p>
+    <div class="facilities-grid">
+      <div class="fac-card reveal" onclick="openFacModal('perpustakaan')"><div class="fac-icon">📚</div><div class="fac-title">Perpustakaan</div><div class="fac-desc">Koleksi buku lengkap untuk mendukung pembelajaran siswa.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal" onclick="openFacModal('elearning')"><div class="fac-icon">🖥️</div><div class="fac-title">eLearning</div><div class="fac-desc">Belajar secara online dimanapun dan kapanpun.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal" onclick="openFacModal('laboratorium')"><div class="fac-icon">🔬</div><div class="fac-title">Laboratorium</div><div class="fac-desc">Lab sains lengkap untuk praktikum siswa.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal" onclick="openFacModal('lapangan')"><div class="fac-icon">⚽</div><div class="fac-title">Lapangan Olahraga</div><div class="fac-desc">Fasilitas olahraga untuk kegiatan jasmani siswa.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal" onclick="openFacModal('musollah')"><div class="fac-icon">🕌</div><div class="fac-title">Musollah</div><div class="fac-desc">Tempat ibadah yang nyaman untuk seluruh warga madrasah.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal" onclick="openFacModal('asrama')"><div class="fac-icon">🏠</div><div class="fac-title">Asrama Siswa</div><div class="fac-desc">Asrama nyaman untuk siswa yang tinggal di lingkungan madrasah.</div><div class="fac-tap">Tap untuk lihat foto →</div></div>
+      <div class="fac-card reveal no-modal"><div class="fac-icon">👁️</div><div class="fac-title">Info Pembelajaran</div><div class="fac-desc">Orangtua/wali dapat memantau perkembangan pembelajaran putera-puterinya.</div></div>
+      <div class="fac-card reveal no-modal"><div class="fac-icon">📝</div><div class="fac-title">Pendaftaran Siswa Baru</div><div class="fac-desc">Siswa baru dapat mendaftar melalui Form Pendaftaran online.</div></div>
+      <div class="fac-card reveal no-modal"><div class="fac-icon">💬</div><div class="fac-title">Bimbingan Konseling</div><div class="fac-desc">Informasi perkembangan bakat dan minat siswa untuk orangtua/wali.</div></div>
+      <div class="fac-card reveal no-modal"><div class="fac-icon">📶</div><div class="fac-title">Jaringan Internet</div><div class="fac-desc">Layanan jaringan online di seluruh wilayah sekolah.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL FASILITAS -->
+<div class="fac-modal" id="fac-modal" onclick="closeFacModal()">
+  <div class="fac-modal-inner" onclick="event.stopPropagation()">
+    <button class="fac-modal-close" onclick="closeFacModal()">✕</button>
+    <div class="fac-modal-img" id="fac-modal-img"></div>
+    <div class="fac-modal-title" id="fac-modal-title"></div>
+    <div class="fac-modal-desc" id="fac-modal-desc"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GALERI -->
+<section id="galeri">
+  <div class="section-inner">
+    <div class="section-tag">Dokumentasi</div>
+    <h2>Galeri <span>Madrasah</span></h2>
+    <p class="section-desc">Momen-momen berharga kegiatan dan kehidupan di MAN Bengkulu Selatan.</p>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <img src="gedung.jpg" alt="Gedung Sekolah" onerror="this.style.display='none'">
+        <div class="gallery-placeholder"><span>🏫</span><span>Gedung Utama</span></div>
+        <div class="gallery-overlay"><span>🏫 Gedung Utama</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="kegiatan1.jpg" alt="Kegiatan Siswa" onerror="this.style.display='none'">
+        <div class="gallery-placeholder"><span>🎓</span><span>Kegiatan Siswa</span></div>
+        <div class="gallery-overlay"><span>🎓 Kegiatan Siswa</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="upacara.jpg" alt="Upacara Bendera" onerror="this.style.display='none'">
+        <div class="gallery-placeholder"><span>🇮🇩</span><span>Upacara Bendera</span></div>
+        <div class="gallery-overlay"><span>🇮🇩 Upacara Bendera</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="laboratorium.jpg" alt="Laboratorium" onerror="this.style.display='none'">
+        <div class="gallery-placeholder"><span>🔬</span><span>Laboratorium</span></div>
+        <div class="gallery-overlay"><span>🔬 Laboratorium</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="perpustakaan.jpg" alt="Perpustakaan" onerror="this.style.display='none'">
+        <div class="gallery-placeholder"><span>📚</span><span>Perpustakaan</span></div>
+        <div class="gallery-overlay"><span>📚 Perpustakaan</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRESTASI -->
+<section id="prestasi">
+  <div class="section-inner">
+    <div class="section-tag">Pencapaian</div>
+    <h2>Prestasi <span>Madrasah</span></h2>
+    <p class="section-desc">Berbagai penghargaan dan prestasi yang telah diraih oleh siswa-siswi MAN Bengkulu Selatan.</p>
+    <div class="slider-wrap">
+      <div class="slider-header">
+        <button class="slider-arrow" onclick="slideArrow('prestasi-slider',-1)">&#8592;</button>
+        <button class="slider-arrow" onclick="slideArrow('prestasi-slider',1)">&#8594;</button>
+      </div>
+      <div class="slider-track" id="prestasi-slider">
+        <div class="prestasi-card"><div class="prestasi-icon">🏆</div><div class="prestasi-level">Tingkat Provinsi</div><div class="prestasi-title">Juara 1 Olimpiade Sains Madrasah Bidang Matematika</div><div class="prestasi-year">2025</div></div>
+        <div class="prestasi-card"><div class="prestasi-icon">🥇</div><div class="prestasi-level">Tingkat Nasional</div><div class="prestasi-title">Finalis Kompetisi Karya Ilmiah Remaja KIR Nasional</div><div class="prestasi-year">2025</div></div>
+        <div class="prestasi-card"><div class="prestasi-icon">🎖️</div><div class="prestasi-level">Tingkat Kabupaten</div><div class="prestasi-title">Juara 1 Lomba Pidato Bahasa Arab Tingkat SMA/MA</div><div class="prestasi-year">2024</div></div>
+        <div class="prestasi-card"><div class="prestasi-icon">⭐</div><div class="prestasi-level">Tingkat Provinsi</div><div class="prestasi-title">Madrasah Berprestasi Terbaik Kategori Inovasi Digital</div><div class="prestasi-year">2024</div></div>
+        <div class="prestasi-card"><div class="prestasi-icon">🎯</div><div class="prestasi-level">Tingkat Kabupaten</div><div class="prestasi-title">Juara 1 Lomba Karya Tulis Ilmiah Tingkat SMA/MA</div><div class="prestasi-year">2024</div></div>
+        <div class="prestasi-card"><div class="prestasi-icon">🏅</div><div class="prestasi-level">Tingkat Provinsi</div><div class="prestasi-title">Juara 2 Lomba Hafidz Qur'an Tingkat Provinsi Bengkulu</div><div class="prestasi-year">2023</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KALENDER -->
+<section id="kalender">
+  <div class="section-inner">
+    <div class="section-tag">Agenda Madrasah</div>
+    <h2>Kalender <span>Kegiatan</span></h2>
+    <div class="calendar-wrap reveal">
+      <div class="cal-header">
+        <div class="cal-month" id="cal-month-label">Mei 2026</div>
+        <div class="cal-nav">
+          <button class="cal-btn" onclick="changeMonth(-1)">&#8592;</button>
+          <button class="cal-btn" onclick="changeMonth(1)">&#8594;</button>
+        </div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-days-header">
+          <div class="cal-day-name">Min</div><div class="cal-day-name">Sen</div>
+          <div class="cal-day-name">Sel</div><div class="cal-day-name">Rab</div>
+          <div class="cal-day-name">Kam</div><div class="cal-day-name">Jum</div>
+          <div class="cal-day-name">Sab</div>
+        </div>
+        <div class="cal-days" id="cal-days"></div>
+      </div>
+      <div class="cal-events" id="cal-events"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BERITA -->
+<section id="berita">
+  <div class="section-inner">
+    <div class="section-tag">Terkini</div>
+    <h2>Berita & <span>Kegiatan</span></h2>
+    <div class="slider-wrap">
+      <div class="slider-header">
+        <button class="slider-arrow" onclick="slideArrow('berita-slider',-1)">&#8592;</button>
+        <button class="slider-arrow" onclick="slideArrow('berita-slider',1)">&#8594;</button>
+      </div>
+      <div class="slider-track" id="berita-slider">
+        <div class="news-card"><div class="news-img"><img src="berita-purnabakti.jpg" alt="Purnabakti" onerror="this.style.display='none'"><span style="position:relative;z-index:1;font-size:3rem">🏫</span><div class="news-date">25 MEI</div></div><div class="news-body"><h3>Jelang Masa Purnabakti, Pembina Upacara Sampaikan Pesan Penting tentang Pendidikan Karakter Siswa</h3><p class="news-excerpt">Pembina upacara menyampaikan pesan bermakna seputar pentingnya pendidikan karakter menjelang masa purnabakti.</p></div></div>
+        <div class="news-card"><div class="news-img"><img src="berita-pramuka.jpg" alt="Pramuka" onerror="this.style.display='none'"><span style="position:relative;z-index:1;font-size:3rem">🪖</span><div class="news-date">22 MEI</div></div><div class="news-body"><h3>Kepala MAN Bengkulu Selatan Ikuti Kegiatan Orientasi Gerakan Pramuka Madrasah 2026 Tingkat Provinsi Bengkulu</h3><p class="news-excerpt">Kepala madrasah turut hadir dan mengikuti kegiatan orientasi Gerakan Pramuka Madrasah tingkat Provinsi Bengkulu tahun 2026.</p></div></div>
+        <div class="news-card"><div class="news-img"><img src="berita-pelepasan.jpg" alt="Pelepasan" onerror="this.style.display='none'"><span style="position:relative;z-index:1;font-size:3rem">🎓</span><div class="news-date">30 APR</div></div><div class="news-body"><h3>Pelepasan Siswa Kelas XII MAN Bengkulu Selatan, Momen Haru yang Penuh Kebanggaan</h3><p class="news-excerpt">Acara pelepasan siswa kelas XII berlangsung penuh haru dan kebanggaan bersama seluruh civitas madrasah.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-tag">FAQ</div>
+    <h2>Pertanyaan yang <span>Sering Diajukan</span></h2>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <div class="faq-q">Saya ingin menjadi member di sekolah ini, apakah bisa mendaftar?<span class="faq-arrow">+</span></div>
+        <div class="faq-a">Sekolah membuka pendaftaran untuk login ke halaman member jika anda adalah siswa baru, orangtua/wali, alumni ataupun pemerhati pendidikan yang akan mendapatkan informasi dan dapat memberikan tanggapan atau masukan kepada sekolah.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Bagaimana saya bisa mendaftar menjadi member di sekolah ini?<span class="faq-arrow">+</span></div>
+        <div class="faq-a">Anda dapat mendaftar melalui halaman pendaftaran member yang tersedia di website ini. Lengkapi data diri Anda dan tunggu verifikasi dari pihak madrasah.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Saya adalah orangtua/wali dari siswa yang sudah aktif. Apakah saya bisa mendaftar?<span class="faq-arrow">+</span></div>
+        <div class="faq-a">Ya, orangtua/wali dari siswa yang sudah aktif juga dapat mendaftar sebagai member untuk memantau perkembangan belajar putra-putri Anda melalui platform ini.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIAL -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag">Testimonial</div>
+    <div class="testimonial reveal">
+      <p>"Kita sukseskan implementasi kurikulum merdeka dengan memanfaatkan website madrasah sebagai sarana pembelajaran dan komunikasi yang efektif."</p>
+      <div class="t-author">
+        <div class="t-avatar" style="overflow:hidden;padding:0;">
+          <img src="erlen.jpg" alt="Erlen Gustiana" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" onerror="this.style.display='none';this.parentElement.textContent='E'">
+        </div>
+        <div><div class="t-name">Erlen Gustiana</div><div class="t-role">Administrator</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="section-inner">
+    <div class="section-tag">Hubungi Kami</div>
+    <h2>Info <span>Kontak</span></h2>
+    <div class="contact-grid reveal">
+      <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-info"><div class="clabel">Telepon</div><div class="cval">73921204</div></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div class="contact-info"><div class="clabel">Email</div><div class="cval">info@manbengkuluselatan.sch.id</div></div></div>
+      <div class="contact-item"><div class="contact-icon">🌐</div><div class="contact-info"><div class="clabel">Website</div><div class="cval">www.manbengkuluselatan.sch.id</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-info"><div class="clabel">Alamat</div><div class="cval">Jl. Pangeran Duayu No.03, Pasar Bawah, Kec. Pasar Manna</div></div></div>
+    </div>
+    <div class="social-row reveal">
+      <a href="https://www.facebook.com/madrasahaliyahnegeri.bengkuluselatan.5" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/man.bengkuluselatan" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="url(#ig-grad)"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://youtube.com/@manbengkuluselatan" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+      <a href="https://vm.tiktok.com/ZS9YWrPQCGkDU-QQWDH/" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/></svg>
+        TikTok
+      </a>
+    </div>
+    <a href="https://maps.google.com/?q=MAN+Bengkulu+Selatan" target="_blank" class="maps-btn-below reveal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 1.92.78 3.66 2.03 4.93L12 2z" fill="#B31412"/>
+        <path d="M19 9c0 3.15-2.55 7.6-5.25 11.13L12 22S5 14.25 5 9c0-3.87 3.13-7 7-7s7 3.13 7 7z" fill="#EA4335"/>
+        <circle cx="12" cy="9" r="2.5" fill="white"/>
+      </svg>
+      Buka di Google Maps →
+    </a>
+    <div class="visitor-row reveal">
+      <div class="visitor-chip">🟢 Online Sekarang<strong>2</strong></div>
+      <div class="visitor-chip">📅 Hari Ini<strong>92</strong></div>
+      <div class="visitor-chip">📊 Total Pengunjung<strong>184.720</strong></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-social">
+      <a href="https://www.facebook.com/madrasahaliyahnegeri.bengkuluselatan.5" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/man.bengkuluselatan" target="_blank">Instagram</a>
+      <a href="https://youtube.com/@manbengkuluselatan" target="_blank">YouTube</a>
+      <a href="https://vm.tiktok.com/ZS9YWrPQCGkDU-QQWDH/" target="_blank">TikTok</a>
+    </div>
+    © 2026 <span>MAN Bengkulu Selatan</span> · Madrasah Hebat, Madrasah Berprestasi
+  </div>
+</footer>
+
+<script>
+// ── SMOOTH SCROLL ──
+function smoothScrollTo(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  const targetY = target.getBoundingClientRect().top + window.scrollY - 72;
+  const startY = window.scrollY;
+  const diff = targetY - startY;
+  const duration = 900;
+  let startTime = null;
+  function ease(t) { return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    const p = Math.min((ts - startTime) / duration, 1);
+    window.scrollTo(0, startY + diff * ease(p));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const id = this.getAttribute('href').slice(1);
+    if (!id) return;
+    e.preventDefault();
+    smoothScrollTo(id);
+  });
+});
+
+// ── PROGRESS BAR ──
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  reveals.forEach(el => el.classList.add('hidden'));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => { e.target.classList.remove('hidden'); e.target.classList.add('visible'); }, i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+}
+
+// ── COUNTER ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  if (target === 0) return;
+  const duration = 2000, step = target / (duration / 16);
+  let cur = 0;
+  const t = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = Math.floor(cur).toLocaleString('id');
+    if (cur >= target) clearInterval(t);
+  }, 16);
+}
+const counters = document.querySelectorAll('[data-target]');
+const cObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); cObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+counters.forEach(c => cObs.observe(c));
+
+// ── FAQ ──
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── KALENDER ──
+const events = {
+  '2026-05-02': { title: 'Hari Pendidikan Nasional', desc: 'Peringatan Hardiknas bersama civitas madrasah', badge: 'Nasional' },
+  '2026-05-13': { title: 'Pembinaan Akreditasi Kemenag', desc: 'Kepala madrasah mengikuti pembinaan akreditasi', badge: 'Kegiatan' },
+  '2026-05-20': { title: 'Hari Kebangkitan Nasional', desc: 'Upacara bendera peringatan Harkitnas', badge: 'Nasional' },
+  '2026-05-24': { title: 'Rapat Dewan Guru', desc: 'Evaluasi dan koordinasi kegiatan semester', badge: 'Internal' },
+  '2026-06-01': { title: 'Hari Lahir Pancasila', desc: 'Upacara dan kegiatan wawasan kebangsaan', badge: 'Nasional' },
+  '2026-06-15': { title: 'Ujian Akhir Semester', desc: 'Ujian akhir semester genap tahun ajaran 2025/2026', badge: 'Akademik' },
+};
+
+const MONTHS = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+let curYear = 2026, curMonth = 4; // 0-indexed, Mei = 4
+
+function renderCalendar() {
+  const label = document.getElementById('cal-month-label');
+  const daysEl = document.getElementById('cal-days');
+  const eventsEl = document.getElementById('cal-events');
+  label.textContent = MONTHS[curMonth] + ' ' + curYear;
+
+  const firstDay = new Date(curYear, curMonth, 1).getDay();
+  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+  const today = new Date();
+
+  let html = '';
+  for (let i = 0; i < firstDay; i++) html += '<div class="cal-day empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = curYear + '-' + String(curMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const isToday = (today.getFullYear()===curYear && today.getMonth()===curMonth && today.getDate()===d);
+    const hasEv = events[dateStr];
+    let cls = 'cal-day';
+    if (isToday) cls += ' today';
+    else if (hasEv) cls += ' has-event';
+    html += `<div class="${cls}" title="${hasEv?hasEv.title:''}">${d}</div>`;
+  }
+  daysEl.innerHTML = html;
+
+  // Show events for this month
+  const monthEvents = Object.entries(events).filter(([k]) => {
+    const [y,m] = k.split('-').map(Number);
+    return y === curYear && m === curMonth + 1;
+  }).sort(([a],[b]) => a.localeCompare(b));
+
+  if (monthEvents.length === 0) {
+    eventsEl.innerHTML = '<p style="color:var(--gray);font-size:0.85rem;padding:0 0 1rem;text-align:center;">Tidak ada agenda bulan ini.</p>';
+    return;
+  }
+  eventsEl.innerHTML = monthEvents.map(([dateStr, ev]) => {
+    const d = new Date(dateStr);
+    const day = d.getDate();
+    const mon = MONTHS[d.getMonth()].substring(0,3).toUpperCase();
+    return `<div class="cal-event-item">
+      <div class="cal-event-date"><strong>${day}</strong>${mon}</div>
+      <div class="cal-event-info">
+        <div class="ev-title">${ev.title}</div>
+        <div class="ev-desc">${ev.desc}</div>
+      </div>
+      <div class="cal-event-badge">${ev.badge}</div>
+    </div>`;
+  }).join('');
+}
+
+function changeMonth(dir) {
+  curMonth += dir;
+  if (curMonth < 0) { curMonth = 11; curYear--; }
+  if (curMonth > 11) { curMonth = 0; curYear++; }
+  renderCalendar();
+}
+
+renderCalendar();
+</script>
+<script>
+function slideArrow(trackId, dir) {
+  const track = document.getElementById(trackId);
+  const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth : track.offsetWidth;
+  track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+}
+
+// FAC MODAL
+const facData = {
+  perpustakaan: { icon:'📚', title:'Perpustakaan', img:'perpustakaan.jpg', desc:'Perpustakaan MAN Bengkulu Selatan menyediakan koleksi buku lengkap, ruang baca yang nyaman, dan akses digital untuk mendukung pembelajaran siswa.' },
+  elearning: { icon:'🖥️', title:'eLearning', img:'elearning.jpg', desc:'Platform eLearning modern yang memungkinkan siswa belajar kapan saja dan di mana saja dengan konten pembelajaran interaktif.' },
+  laboratorium: { icon:'🔬', title:'Laboratorium', img:'laboratorium.jpg', desc:'Laboratorium sains lengkap dengan peralatan modern untuk mendukung praktikum Fisika, Kimia, dan Biologi.' },
+  lapangan: { icon:'⚽', title:'Lapangan Olahraga', img:'lapangan.jpg', desc:'Lapangan olahraga multifungsi untuk kegiatan jasmani, ekstrakurikuler, dan kompetisi antar siswa.' },
+  musollah: { icon:'🕌', title:'Musollah', img:'musollah.jpg', desc:'Musollah yang luas dan nyaman sebagai pusat kegiatan ibadah dan keagamaan seluruh warga madrasah.' },
+  asrama: { icon:'🏠', title:'Asrama Siswa', img:'asrama.jpg', desc:'Asrama siswa yang bersih, aman, dan nyaman dengan fasilitas lengkap untuk siswa yang tinggal di lingkungan madrasah.' },
+};
+
+function openFacModal(key) {
+  const d = facData[key];
+  if (!d) return;
+  document.getElementById('fac-modal-title').textContent = d.title;
+  document.getElementById('fac-modal-desc').textContent = d.desc;
+  const imgEl = document.getElementById('fac-modal-img');
+  imgEl.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = d.img;
+  img.onerror = () => { imgEl.innerHTML = '<span style="font-size:5rem">' + d.icon + '</span>'; };
+  imgEl.appendChild(img);
+  document.getElementById('fac-modal').classList.add('open');
+}
+
+function closeFacModal() {
+  document.getElementById('fac-modal').classList.remove('open');
+}
+</script>
+</body>
+</html>
